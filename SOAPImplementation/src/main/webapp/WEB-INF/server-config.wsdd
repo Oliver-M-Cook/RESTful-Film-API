@@ -1,0 +1,93 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\olive\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SOAPImplementation\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="FilmResources" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="getFilmByIDAsString" qname="ns1:getFilmByIDAsString" returnQName="ns1:getFilmByIDAsStringReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://resources.services.rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:id" type="xsd:int"/>
+  </ns2:operation>
+  <ns1:operation name="getAllFilmsAsString" qname="ns2:getAllFilmsAsString" returnQName="ns2:getAllFilmsAsStringReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://resources.services.rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getFilmByYearAsString" qname="ns3:getFilmByYearAsString" returnQName="ns3:getFilmByYearAsStringReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://resources.services.rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:year" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getFilmByNameAsString" qname="ns4:getFilmByNameAsString" returnQName="ns4:getFilmByNameAsStringReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://resources.services.rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:name" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getAllFilms" qname="ns5:getAllFilms" returnQName="ns5:getAllFilmsReturn" returnType="ns6:Film" soapAction="" xmlns:ns5="http://resources.services.rest" xmlns:ns6="http://models.services.rest"/>
+  <ns1:operation name="updateFilm" qname="ns7:updateFilm" soapAction="" xmlns:ns7="http://resources.services.rest">
+   <ns1:parameter qname="ns7:film" type="ns8:Film" xmlns:ns8="http://models.services.rest"/>
+  </ns1:operation>
+  <ns1:operation name="getFilmByID" qname="ns9:getFilmByID" returnQName="ns9:getFilmByIDReturn" returnType="ns10:Film" soapAction="" xmlns:ns10="http://models.services.rest" xmlns:ns9="http://resources.services.rest">
+   <ns1:parameter qname="ns9:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getFilmByYear" qname="ns11:getFilmByYear" returnQName="ns11:getFilmByYearReturn" returnType="ns12:Film" soapAction="" xmlns:ns11="http://resources.services.rest" xmlns:ns12="http://models.services.rest">
+   <ns1:parameter qname="ns11:year" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getFilmByName" qname="ns13:getFilmByName" returnQName="ns13:getFilmByNameReturn" returnType="ns14:Film" soapAction="" xmlns:ns13="http://resources.services.rest" xmlns:ns14="http://models.services.rest">
+   <ns1:parameter qname="ns13:name" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getNextID" qname="ns15:getNextID" returnQName="ns15:getNextIDReturn" returnType="xsd:string" soapAction="" xmlns:ns15="http://resources.services.rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="insertFilm" qname="ns16:insertFilm" soapAction="" xmlns:ns16="http://resources.services.rest">
+   <ns1:parameter qname="ns16:film" type="ns17:Film" xmlns:ns17="http://models.services.rest"/>
+  </ns1:operation>
+  <ns1:operation name="deleteFilm" qname="ns18:deleteFilm" soapAction="" xmlns:ns18="http://resources.services.rest">
+   <ns1:parameter qname="ns18:id" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAllFilms getFilmByYear getFilmByNameAsString getFilmByName getAllFilmsAsString getFilmByID getNextID getFilmByIDAsString deleteFilm getFilmByYearAsString updateFilm insertFilm"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="FilmResources"/>
+  <ns1:parameter name="className" value="rest.services.resources.FilmResources"/>
+  <ns1:parameter name="wsdlServicePort" value="FilmResources"/>
+  <ns1:parameter name="schemaQualified" value="http://models.services.rest,http://resources.services.rest"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://resources.services.rest"/>
+  <ns1:parameter name="wsdlServiceElement" value="FilmResourcesService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns19:Film" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:rest.services.models.Film" xmlns:ns19="http://models.services.rest"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
