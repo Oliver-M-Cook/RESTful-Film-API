@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FilmResourcesService WSDL service -->
+
+  <service name="FilmResources" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://resources.services.rest"/>
+      <parameter name="wsdlServiceElement" value="FilmResourcesService"/>
+      <parameter name="schemaQualified" value="http://models.services.rest,http://resources.services.rest"/>
+      <parameter name="wsdlServicePort" value="FilmResources"/>
+      <parameter name="className" value="rest.services.resources.FilmResources"/>
+      <parameter name="wsdlPortType" value="FilmResources"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getFilmByIDAsString" qname="operNS:getFilmByIDAsString" returnQName="retNS:getFilmByIDAsStringReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getAllFilmsAsString" qname="operNS:getAllFilmsAsString" returnQName="retNS:getAllFilmsAsStringReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getFilmByYearAsString" qname="operNS:getFilmByYearAsString" returnQName="retNS:getFilmByYearAsStringReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:year" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getFilmByNameAsString" qname="operNS:getFilmByNameAsString" returnQName="retNS:getFilmByNameAsStringReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://models.services.rest" name="getAllFilms" qname="operNS:getAllFilms" returnQName="retNS:getAllFilmsReturn" returnType="rtns:Film" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" name="updateFilm" qname="operNS:updateFilm" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://models.services.rest" qname="pns:film" type="tns:Film"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://models.services.rest" name="getFilmByID" qname="operNS:getFilmByID" returnQName="retNS:getFilmByIDReturn" returnType="rtns:Film" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://models.services.rest" name="getFilmByYear" qname="operNS:getFilmByYear" returnQName="retNS:getFilmByYearReturn" returnType="rtns:Film" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:year" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://models.services.rest" name="getFilmByName" qname="operNS:getFilmByName" returnQName="retNS:getFilmByNameReturn" returnType="rtns:Film" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" xmlns:retNS="http://resources.services.rest" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getNextID" qname="operNS:getNextID" returnQName="retNS:getNextIDReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" name="insertFilm" qname="operNS:insertFilm" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://models.services.rest" qname="pns:film" type="tns:Film"/>
+      </operation>
+      <operation xmlns:operNS="http://resources.services.rest" name="deleteFilm" qname="operNS:deleteFilm" soapAction="">
+        <parameter xmlns:pns="http://resources.services.rest" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllFilms getFilmByYear getFilmByNameAsString getFilmByName getAllFilmsAsString getFilmByID getNextID getFilmByIDAsString deleteFilm getFilmByYearAsString updateFilm insertFilm"/>
+
+      <typeMapping xmlns:ns="http://models.services.rest" qname="ns:Film" type="java:rest.services.models.Film" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
